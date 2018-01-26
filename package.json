@@ -1,0 +1,21 @@
+{
+  "name": "nestingstyles",
+  "version": "0.0.1",
+  "description": "A rebuild of an unmaintained repo I found",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel lib -d ./",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FoxChrisRealTheGit/nestingStyles.git"
+  },
+  "author": "FoxChrisRealThe (http://foxchrisrealthe.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FoxChrisRealTheGit/nestingStyles/issues"
+  },
+  "homepage": "https://github.com/FoxChrisRealTheGit/nestingStyles#readme"
+}
