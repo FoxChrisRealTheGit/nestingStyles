@@ -1,14 +1,23 @@
-import  {CSSProperty} from'react';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _react = require('react');
+
 var isArray = Array.isArray;
 var keys = Object.keys;
 
-var COMPLEX_OVERRIDES = CSSProperty;
+var COMPLEX_OVERRIDES = _react.CSSProperty;
 
 function applyClassName(props, className, order, maxOverridesLength) {
   if (!props.className) {
     props.className = '';
   }
-  var length = !maxOverridesLength || (order + 1) <= maxOverridesLength ? order + 1 : maxOverridesLength;
+  var length = !maxOverridesLength || order + 1 <= maxOverridesLength ? order + 1 : maxOverridesLength;
   var uniquePartSplit = className.split('_');
   var unique = uniquePartSplit[uniquePartSplit.length - 1];
   for (var j = 0; j < length; j++) {
@@ -47,11 +56,9 @@ function applyOverrides(props, key) {
 function applyStyle(props, style, order, maxOverridesLength) {
   if (style === null || style === undefined || style === false) {
     return order;
-  }
-  else if (typeof style === 'string' && order < 10) {
+  } else if (typeof style === 'string' && order < 10) {
     return applyClassName(props, style, order, maxOverridesLength);
-  }
-  else {
+  } else {
     return applyInlineStyle(props, style, order);
   }
 }
@@ -66,22 +73,18 @@ function applyStyles(props, styles, order, inline, maxOverridesLength) {
     for (var i = 0, len = styles.length; i < len; i++) {
       var style = styles[i];
       if ("production" !== process.env.NODE_ENV && style) {
-        if (typeof style === 'object' && !Array.isArray(style)) {
+        if ((typeof style === 'undefined' ? 'undefined' : _typeof(style)) === 'object' && !Array.isArray(style)) {
           inline = true;
-        }
-        else if (inline && typeof style === 'string') {
-          console.warn('You are trying to override inline styles with a ' +
-                       'class, which might cause issues due to classes ' +
-                       'having lower CSS specificity then inline styles.');
+        } else if (inline && typeof style === 'string') {
+          console.warn('You are trying to override inline styles with a ' + 'class, which might cause issues due to classes ' + 'having lower CSS specificity then inline styles.');
         }
       }
       order = applyStyles(props, style, order, inline, maxOverridesLength);
     }
     return order;
-  }
-  else {
+  } else {
     return applyStyle(props, styles, order, maxOverridesLength);
   }
 }
 
-export default applyStyles;
+exports.default = applyStyles;

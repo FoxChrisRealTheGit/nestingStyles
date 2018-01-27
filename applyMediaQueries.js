@@ -1,4 +1,14 @@
-import recalcMediaQueryStyles from './recalcMediaQueryStyles.js';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _recalcMediaQueryStyles = require('./recalcMediaQueryStyles.js');
+
+var _recalcMediaQueryStyles2 = _interopRequireDefault(_recalcMediaQueryStyles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var matchMedia = null;
 if (typeof window !== 'undefined' && !window.__ReactStyle__) {
@@ -12,14 +22,12 @@ function applyMediaQueries(registeredMediaQueries, stylesheet, register) {
   var styleNames = Object.keys(stylesheet);
 
   function recalc() {
-    recalcMediaQueryStyles(registeredMediaQueries);
+    (0, _recalcMediaQueryStyles2.default)(registeredMediaQueries);
   }
 
-  if (!hasVisibilityChangeListener
-      && typeof document !== 'undefined'
-      && 'visibilityState' in document) {
+  if (!hasVisibilityChangeListener && typeof document !== 'undefined' && 'visibilityState' in document) {
     hasVisibilityChangeListener = true;
-    document.addEventListener("visibilitychange", function() {
+    document.addEventListener("visibilitychange", function () {
       if (document.visibilityState === 'visible') {
         recalc();
       }
@@ -67,8 +75,7 @@ function applyMediaQueries(registeredMediaQueries, stylesheet, register) {
           mediaQueryBreakPoints[mediaQuery] = true;
         }
       }
-    }
-    else {
+    } else {
       newStyleSheet[styleName] = style;
     }
   }
@@ -76,5 +83,4 @@ function applyMediaQueries(registeredMediaQueries, stylesheet, register) {
   return newStyleSheet;
 }
 
-
-export default applyMediaQueries;
+exports.default = applyMediaQueries;
